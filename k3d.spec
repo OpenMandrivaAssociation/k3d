@@ -4,7 +4,7 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.6.6.0
-Release: 	%mkrel 4
+Release: 	%mkrel 5
 License:	GPL
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
@@ -27,6 +27,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	python-devel		>= 2.5
+BuildRequires:	superlu
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
@@ -103,7 +104,7 @@ automake
 	--with-png \
 	--with-python \
 	--without-qt \
-	--without-superlu \
+	--with-superlu \
 	--with-svg-icons \
 	--with-tiff
 %make
