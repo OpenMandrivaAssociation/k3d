@@ -3,8 +3,8 @@
 
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
-Version:	0.6.6.0
-Release: 	%mkrel 5
+Version:	0.6.7.0
+Release: 	%mkrel 1
 License:	GPL
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
@@ -18,7 +18,7 @@ BuildRequires:	gtkmm2.4-devel
 BuildRequires:	libboost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel
-BuildRequires:	libgts-devel
+#BuildRequires:	libgts-devel
 BuildRequires:	libMagick-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
@@ -95,7 +95,7 @@ automake
 	--with-freetype2 \
 	--with-gnome \
 	--without-graphviz \
-	--with-gts \
+	--without-gts \
 	--with-imagemagick \
 	--with-jpeg \
 	--with-ngui \
@@ -194,5 +194,3 @@ chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
 %defattr(644,root,root,755)
 %{_libdir}/*.a
 %{_libdir}/%{name}/*.a
-
-
