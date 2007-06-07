@@ -4,7 +4,7 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.6.7.0
-Release: 	%mkrel 2
+Release: 	%mkrel 3
 License:	GPL
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
@@ -17,7 +17,7 @@ Patch2:		k3d-0.6.6.0-gui-in-pkglibdir.patch
 BuildRequires:	gtkmm2.4-devel
 BuildRequires:	libboost-devel
 BuildRequires:	mesa-common-devel
-BuildRequires:	libexpat-devel
+BuildRequires:	libexpat-devel >= 2.0.1
 #BuildRequires:	libgts-devel
 BuildRequires:	libMagick-devel
 BuildRequires:	gtkglext-devel
@@ -26,7 +26,7 @@ BuildRequires:	libOpenEXR-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	python-devel		>= 2.5
+BuildRequires:	python-devel >= %{py_ver}
 BuildRequires:	superlu
 %ifarch x86_64
 BuildRequires:	chrpath
