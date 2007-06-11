@@ -26,7 +26,7 @@ BuildRequires:	libOpenEXR-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	python-devel >= %{py_ver}
+BuildRequires:	python-devel >= 2.5
 BuildRequires:	superlu
 %ifarch x86_64
 BuildRequires:	chrpath
