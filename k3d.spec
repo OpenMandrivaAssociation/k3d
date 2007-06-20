@@ -1,10 +1,12 @@
 %define major 0
 %define libname %mklibname k3d %{major}
+%define develname %mklibname %{name} -d
+%define staticname %mklibname %{name} -d -s
 
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.6.7.0
-Release: 	%mkrel 3
+Release:	%mkrel 3
 License:	GPL
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
@@ -55,7 +57,7 @@ Requires:	%{name} = %{version}-%{release}
 %description -n %{libname}
 Libraries that is used for K-3D.
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:	K-3D development headers
 License:	GPL
 Group:		Development/C++
@@ -63,22 +65,23 @@ Provides:	%{name}-devel
 Provides:	lib%{name}-devel
 Provides:	%{_lib}%{name}-devel
 Requires:	%{_lib}%{name} = %{version}-%{release}
+Obsoletes:	%{libname}-devel
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Development libraries needed to develop new k3d plugins.
 
-%package -n %{libname}-static-devel
+%package -n %{staticname}
 Summary:	K-3D static libraries
 License:	GPL
 Group:		Development/C++
 Provides:	%{name}-static-devel
-Requires:	%{_lib}%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
 
-%description -n %{libname}-static-devel
+%description -n %{staticname}
 Static libraries for K-3D.
 
 %prep
-%setup -q %{name}-%{version}
+%setup -q
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
@@ -181,7 +184,7 @@ chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
 %attr(755,root,root) %{_libdir}/%{name}/*.so.%{major}*
 %{_libdir}/%{name}/*.so
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(644,root,root,755)
 %multiarch %attr(755,root,root) %{multiarch_bindir}/%{name}-config
 %attr(755,root,root) %{_bindir}/%{name}-config
@@ -190,7 +193,7 @@ chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
 %{_libdir}/%{name}/*.la
 %{_includedir}/k3d
 
-%files -n %{libname}-static-devel
+%files -n %{staticname}
 %defattr(644,root,root,755)
 %{_libdir}/*.a
 %{_libdir}/%{name}/*.a
