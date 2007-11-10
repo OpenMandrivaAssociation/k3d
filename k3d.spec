@@ -6,8 +6,8 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.6.7.0
-Release:	%mkrel 4
-License:	GPL
+Release:	%mkrel 5
+License:	GPLv2+
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
 Source:		http://downloads.sourceforge.net/k3d/%{name}-%{version}-src.tar.bz2
@@ -50,8 +50,6 @@ motion-picture-quality animation using RenderMan-compliant render engines.
 Summary:	K-3D libraries
 License:	GPL
 Group:		System/Libraries
-Provides:	lib%{name} = %{version}-%{release}
-Provides:	%{_lib}%{name} = %{version}-%{release}
 Requires:	%{name} = %{version}-%{release}
 
 %description -n %{libname}
@@ -61,11 +59,9 @@ Libraries that is used for K-3D.
 Summary:	K-3D development headers
 License:	GPL
 Group:		Development/C++
-Provides:	%{name}-devel
-Provides:	lib%{name}-devel
-Provides:	%{_lib}%{name}-devel
-Requires:	%{_lib}%{name} = %{version}-%{release}
-Obsoletes:	%{libname}-devel
+Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+Obsoletes:	%mklibname -d k3d 0
 
 %description -n %{develname}
 Development libraries needed to develop new k3d plugins.
@@ -75,7 +71,7 @@ Summary:	K-3D static libraries
 License:	GPL
 Group:		Development/C++
 Provides:	%{name}-static-devel
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{develname} = %{version}-%{release}
 
 %description -n %{staticname}
 Static libraries for K-3D.
