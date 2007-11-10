@@ -17,7 +17,7 @@ Patch1:		k3d-0.6.6.0-configure-libdir.patch
 # symlinks in %{_libdir}
 Patch2:		k3d-0.6.6.0-gui-in-pkglibdir.patch
 BuildRequires:	gtkmm2.4-devel
-BuildRequires:	libboost-devel
+BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
 #BuildRequires:	libgts-devel
