@@ -16,7 +16,8 @@ Patch1:		k3d-0.6.6.0-configure-libdir.patch
 # move guilib to %{_libdir}/%{name} as we need the .so, and we can't have .so
 # symlinks in %{_libdir}
 Patch2:		k3d-0.6.6.0-gui-in-pkglibdir.patch
-BuildRequires:	gtkmm2.4-devel
+Patch3:		k3d-0.6.7.0-sigc-hide.patch
+BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
@@ -48,7 +49,6 @@ motion-picture-quality animation using RenderMan-compliant render engines.
 
 %package -n %{libname}
 Summary:	K-3D libraries
-License:	GPL
 Group:		System/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -57,9 +57,9 @@ Libraries that is used for K-3D.
 
 %package -n %{develname}
 Summary:	K-3D development headers
-License:	GPL
 Group:		Development/C++
 Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	%mklibname -d k3d 0
 
@@ -81,6 +81,7 @@ Static libraries for K-3D.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 aclocal -I m4
@@ -92,13 +93,13 @@ automake
 	--without-libxml2 \
 	--with-external-boost \
 	--with-freetype2 \
-	--with-gnome \
+	--without-gnome \
 	--without-graphviz \
 	--without-gts \
 	--with-imagemagick \
 	--with-jpeg \
 	--with-ngui \
-	--without-nls \
+	--with-nls \
 	--with-openexr \
 	--with-png \
 	--with-python \
