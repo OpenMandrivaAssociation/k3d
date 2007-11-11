@@ -23,6 +23,7 @@ BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
 #BuildRequires:	libgts-devel
 BuildRequires:	libMagick-devel
+BuildRequires:	libgraphviz-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	libOpenEXR-devel
@@ -30,7 +31,8 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	python-devel >= 2.5
-BuildRequires:	superlu
+#BuildRequires:	superlu
+BuildRequires:	librsvg2-devel
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
@@ -94,7 +96,7 @@ automake
 	--with-external-boost \
 	--with-freetype2 \
 	--without-gnome \
-	--without-graphviz \
+	--with-graphviz \
 	--without-gts \
 	--with-imagemagick \
 	--with-jpeg \
@@ -104,7 +106,7 @@ automake
 	--with-png \
 	--with-python \
 	--without-qt \
-	--with-superlu \
+	--without-superlu \
 	--with-svg-icons \
 	--with-tiff
 %make
@@ -172,6 +174,7 @@ chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
 %{_datadir}/%{name}/fonts/*.ttf
 %{_datadir}/%{name}/logo/*.svg
 %{_datadir}/%{name}/tutorials/*
+%{_datadir}/%{name}/locale/*
 %{_mandir}/man1/*
 %{_datadir}/applications/%{name}.desktop
 
