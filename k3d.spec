@@ -40,6 +40,7 @@ Requires:	yafray
 Requires:	povray
 Requires:	aqsis
 Requires:	%{_lib}%{name} = %{version}-%{release}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 K-3D is the free-as-in-freedom 3D modeling, animation, and rendering 
