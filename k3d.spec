@@ -22,7 +22,7 @@ BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
 #BuildRequires:	libgts-devel
-BuildRequires:	libMagick-devel
+BuildRequires:	libmagick-devel
 BuildRequires:	libgraphviz-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
