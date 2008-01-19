@@ -6,7 +6,7 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.6.7.0
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPLv2+
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
@@ -39,7 +39,7 @@ BuildRequires:	chrpath
 Requires:	yafray
 Requires:	povray
 Requires:	aqsis
-Requires:	%{_lib}%{name} = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
