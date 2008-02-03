@@ -6,7 +6,7 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.6.7.0
-Release:	%mkrel 6
+Release:	%mkrel 7
 License:	GPLv2+
 Group:		Graphics
 Url:		http://k3d.sourceforge.net/new/
@@ -74,6 +74,7 @@ License:	GPL
 Group:		Development/C++
 Provides:	%{name}-static-devel
 Requires:	%{develname} = %{version}-%{release}
+Obsoletes:      %mklibname -d -s k3d 0
 
 %description -n %{staticname}
 Static libraries for K-3D.
