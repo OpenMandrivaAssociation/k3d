@@ -32,7 +32,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	python-devel >= 2.5
 #BuildRequires:	superlu
-BuildRequires:	librsvg2-devel
+BuildRequires:	librsvg-devel
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
