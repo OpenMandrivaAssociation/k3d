@@ -5,12 +5,12 @@
 
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
-Version:	0.6.7.0
-Release:	%mkrel 8
+Version:	0.7.3.0
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
-Url:		http://k3d.sourceforge.net/new/
-Source:		http://downloads.sourceforge.net/k3d/%{name}-%{version}-src.tar.bz2
+Url:		http://www.k-3d.org
+Source:		http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 Patch0:		%{name}-desktop.patch
 Patch1:		k3d-0.6.6.0-configure-libdir.patch
 # move guilib to %{_libdir}/%{name} as we need the .so, and we can't have .so
