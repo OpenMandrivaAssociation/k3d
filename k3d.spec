@@ -11,19 +11,15 @@ License:	GPLv2+
 Group:		Graphics
 Url:		http://www.k-3d.org
 Source:		http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
-Patch0:		%{name}-desktop.patch
-Patch1:		k3d-0.6.6.0-configure-libdir.patch
-# move guilib to %{_libdir}/%{name} as we need the .so, and we can't have .so
-# symlinks in %{_libdir}
-Patch2:		k3d-0.6.6.0-gui-in-pkglibdir.patch
-Patch3:		k3d-0.6.7.0-sigc-hide.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
 #BuildRequires:	libgts-devel
-BuildRequires:	libmagick-devel
-BuildRequires:	libgraphviz-devel
+BuildRequires:	imagemagick-devel
+BuildRequires:	graphviz
+BuildRequires:	doxygen
+BuildRequires:	libext2fs-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	libOpenEXR-devel
@@ -33,6 +29,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	python-devel >= 2.5
 #BuildRequires:	superlu
 BuildRequires:	librsvg-devel
+BuildRequires:	cmake
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
@@ -79,37 +76,11 @@ Obsoletes:      %mklibname -d -s k3d 0
 %description -n %{staticname}
 Static libraries for K-3D.
 
-%prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%prep 
+%setup -q -n %{name}-source-%{version}
 
-%build
-aclocal -I m4
-autoconf
-automake
-%configure2_5x \
-	--enable-shared \
-	--enable-static \
-	--without-libxml2 \
-	--with-external-boost \
-	--with-freetype2 \
-	--without-gnome \
-	--with-graphviz \
-	--without-gts \
-	--with-imagemagick \
-	--with-jpeg \
-	--with-ngui \
-	--with-nls \
-	--with-openexr \
-	--with-png \
-	--with-python \
-	--without-qt \
-	--without-superlu \
-	--with-svg-icons \
-	--with-tiff
+%cmake -DK3D_IMAGEMAGICK_INCLUDE_DIR="%{_includedir}"
+
 %make
 
 %install
