@@ -1,8 +1,3 @@
-%define major 0
-%define libname %mklibname k3d %{major}
-%define develname %mklibname %{name} -d
-%define staticname %mklibname %{name} -d -s
-
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.7.3.0
@@ -12,23 +7,23 @@ Group:		Graphics
 Url:		http://www.k-3d.org
 Source:		http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
-BuildRequires:	boost-devel
+#BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
-#BuildRequires:	libgts-devel
+BuildRequires:	libgts-devel
 BuildRequires:	imagemagick-devel
 BuildRequires:	graphviz
 BuildRequires:	doxygen
 BuildRequires:	libext2fs-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
-BuildRequires:	libOpenEXR-devel
+#BuildRequires:	libOpenEXR-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
-BuildRequires:	libjpeg-devel
+#BuildRequires:	libjpeg-devel
 BuildRequires:	python-devel >= 2.5
-#BuildRequires:	superlu
-BuildRequires:	librsvg-devel
+BuildRequires:	glew-devel
+#BuildRequires:	librsvg-devel
 BuildRequires:	cmake
 %ifarch x86_64
 BuildRequires:	chrpath
@@ -36,7 +31,6 @@ BuildRequires:	chrpath
 Requires:	yafray
 Requires:	povray
 Requires:	aqsis
-Requires:	%{libname} = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -46,60 +40,39 @@ robust, object-oriented plugin architecture, designed to scale to the needs of
 professional artists, and is designed from-the-ground-up to generate 
 motion-picture-quality animation using RenderMan-compliant render engines.
 
-%package -n %{libname}
-Summary:	K-3D libraries
-Group:		System/Libraries
-Requires:	%{name} = %{version}-%{release}
-
-%description -n %{libname}
-Libraries that is used for K-3D.
-
-%package -n %{develname}
+%package devel
 Summary:	K-3D development headers
 Group:		Development/C++
-Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	%mklibname -d k3d 0
 
-%description -n %{develname}
+%description devel
 Development libraries needed to develop new k3d plugins.
-
-%package -n %{staticname}
-Summary:	K-3D static libraries
-License:	GPL
-Group:		Development/C++
-Provides:	%{name}-static-devel
-Requires:	%{develname} = %{version}-%{release}
-Obsoletes:      %mklibname -d -s k3d 0
-
-%description -n %{staticname}
-Static libraries for K-3D.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
 
-%cmake -DK3D_IMAGEMAGICK_INCLUDE_DIR="%{_includedir}"
+%cmake \
+    -DK3D_IMAGEMAGICK_INCLUDE_DIR="%{_includedir}/ImageMagick" \
+    -DK3D_BUILD_GTS_MODULE:BOOL=ON
 
 %make
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
+pushd build
 %makeinstall_std
 
-%multiarch_binaries %{buildroot}%{_bindir}/%{name}-config
+#ifarch x86_64
+#chrpath -d %{buildroot}%{_libdir}/%{name}/*.so.0.0.0
+#chrpath -d %{buildroot}%{_libdir}/*.so.0.0.0
+#chrpath -d %{buildroot}%{_bindir}/k3d-bin
+#chrpath -d %{buildroot}%{_bindir}/k3d-bug-buddy
+#chrpath -d %{buildroot}%{_bindir}/k3d-make-module-proxy
+#chrpath -d %{buildroot}%{_bindir}/k3d-renderframe
+#chrpath -d %{buildroot}%{_bindir}/k3d-renderjob
+#chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
+#endif
 
-%ifarch x86_64
-chrpath -d %{buildroot}%{_libdir}/%{name}/*.so.0.0.0
-chrpath -d %{buildroot}%{_libdir}/*.so.0.0.0
-chrpath -d %{buildroot}%{_bindir}/k3d-bin
-chrpath -d %{buildroot}%{_bindir}/k3d-bug-buddy
-chrpath -d %{buildroot}%{_bindir}/k3d-make-module-proxy
-chrpath -d %{buildroot}%{_bindir}/k3d-renderframe
-chrpath -d %{buildroot}%{_bindir}/k3d-renderjob
-chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
-%endif
+popd
 
 %find_lang %{name}
 
@@ -108,35 +81,24 @@ chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
 
 %post
 %{update_menus}
-%if %mdkversion >= 200700
 %{update_desktop_database}
 %update_icon_cache hicolor
-%endif
 
 %postun
 %{clean_menus}
-%if %mdkversion >= 200700
 %{clean_desktop_database}
 %clean_icon_cache hicolor
-%endif
-
-%post -n %{libname} -p /sbin/ldconfig
-
-%postun -n %{libname} -p /sbin/ldconfig
 
 %files -f %{name}.lang
-%defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README INSTALL TODO
-%doc %{_datadir}/%{name}/documents
-%attr(755,root,root) %{_bindir}/%{name}
-%attr(755,root,root) %{_bindir}/%{name}-b*
-%attr(755,root,root) %{_bindir}/%{name}-m*
-%attr(755,root,root) %{_bindir}/%{name}-r*
-%attr(755,root,root) %{_bindir}/%{name}-s*
-%attr(755,root,root) %{_bindir}/%{name}-u*
+%defattr(-,root,root)
+%doc AUTHORS README INSTALL
 %dir %{_datadir}/%{name}
+%{_bindir}/%{name}*
+%{_libdir}/%{name}/plugins
+%{_libdir}/%{name}/uiplugins
 %{_datadir}/%{name}/*.k3d
 %{_datadir}/%{name}/icons/*
+%{_datadir}/%{name}/documents
 %{_datadir}/%{name}/ngui/*
 %{_datadir}/%{name}/scripts/*
 %{_datadir}/%{name}/shaders/*
@@ -148,24 +110,10 @@ chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
 %{_datadir}/%{name}/tutorials/*
 %{_datadir}/%{name}/locale/*
 %{_mandir}/man1/*
-%{_datadir}/applications/%{name}.desktop
+#{_datadir}/applications/%{name}.desktop
 
-%files -n %{libname}
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so.%{major}*
-%attr(755,root,root) %{_libdir}/%{name}/*.so.%{major}*
-%{_libdir}/%{name}/*.so
-
-%files -n %{develname}
-%defattr(644,root,root,755)
-%multiarch %attr(755,root,root) %{multiarch_bindir}/%{name}-config
-%attr(755,root,root) %{_bindir}/%{name}-config
-%{_libdir}/*.la
-%{_libdir}/*.so
-%{_libdir}/%{name}/*.la
-%{_includedir}/k3d
-
-%files -n %{staticname}
-%defattr(644,root,root,755)
-%{_libdir}/*.a
-%{_libdir}/%{name}/*.a
+%files devel
+%defattr(-,root,root)
+%{_libdir}/libk3dsdk*.so
+%{_libdir}/%{name}/include
+%{_includedir}/%{name}
