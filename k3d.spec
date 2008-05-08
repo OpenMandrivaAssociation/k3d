@@ -5,8 +5,9 @@ Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 Url:		http://www.k-3d.org
-Source:		http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
-Patch0:		k3d-gnome-vfs-x86_64-detecction.patch
+Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
+Source1:	%{name}.desktop
+Patch0:		%{name}-source-0.7.3.0-libdir-output-path.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -51,7 +52,9 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
-%patch0 -p1 
+%if %{_lib} != lib 
+%patch0 -p1
+%endif
 
 %build
 %cmake \
@@ -77,6 +80,9 @@ pushd build
 #endif
 
 popd
+
+mkdir -p %{buildroot}%{_datadir}/applications
+install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %find_lang %{name}
 
@@ -114,7 +120,7 @@ popd
 %{_datadir}/%{name}/tutorials/*
 %{_datadir}/%{name}/locale/*
 %{_mandir}/man1/*
-#{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/%{name}.desktop
 
 %files devel
 %defattr(-,root,root)
