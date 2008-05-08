@@ -7,7 +7,7 @@ Group:		Graphics
 Url:		http://www.k-3d.org
 Source:		http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
-#BuildRequires:	boost-devel
+BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
 BuildRequires:	libexpat-devel >= 2.0.1
 BuildRequires:	libgts-devel
