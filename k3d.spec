@@ -6,6 +6,7 @@ License:	GPLv2+
 Group:		Graphics
 Url:		http://www.k-3d.org
 Source:		http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
+Patch0:		k3d-gnome-vfs-x86_64-detecction.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -49,7 +50,9 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
+%patch0 -p1 
 
+%build
 %cmake \
     -DK3D_IMAGEMAGICK_INCLUDE_DIR="%{_includedir}/ImageMagick" \
     -DK3D_BUILD_GTS_MODULE:BOOL=ON
