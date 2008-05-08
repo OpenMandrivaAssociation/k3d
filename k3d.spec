@@ -18,13 +18,14 @@ BuildRequires:	doxygen
 BuildRequires:	libext2fs-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
-#BuildRequires:	libOpenEXR-devel
+BuildRequires:	libOpenEXR-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
-#BuildRequires:	libjpeg-devel
+BuildRequires:	libjpeg-devel
 BuildRequires:	python-devel >= 2.5
 BuildRequires:	glew-devel
-#BuildRequires:	librsvg-devel
+BuildRequires:	librsvg-devel
+BuildRequires:	gnome-vfs2-devel
 BuildRequires:	cmake
 %ifarch x86_64
 BuildRequires:	chrpath
