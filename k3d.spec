@@ -1,6 +1,6 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
-Version:	0.7.3.0
+Version:	0.7.4.0
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
