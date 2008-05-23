@@ -5,9 +5,9 @@ License:	GPLv2+
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Group:		Graphics
 Url:		http://www.k-3d.org
-Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch0:		k3d-source-0.7.3.0-libdir.patch
+Patch0:		k3d-source-0.7.4.0-libdir.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
