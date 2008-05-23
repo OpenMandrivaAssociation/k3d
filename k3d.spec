@@ -1,13 +1,13 @@
-Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.7.4.0
 Release:	%mkrel 1
 License:	GPLv2+
+Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Group:		Graphics
 Url:		http://www.k-3d.org
 Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 Source1:	%{name}.desktop
-Patch0:		%{name}-source-0.7.3.0-libdir-output-path.patch
+Patch0:		k3d-source-0.7.3.0-libdir.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -67,17 +67,6 @@ Development libraries needed to develop new k3d plugins.
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 pushd build
 %makeinstall_std
-
-#ifarch x86_64
-#chrpath -d %{buildroot}%{_libdir}/%{name}/*.so.0.0.0
-#chrpath -d %{buildroot}%{_libdir}/*.so.0.0.0
-#chrpath -d %{buildroot}%{_bindir}/k3d-bin
-#chrpath -d %{buildroot}%{_bindir}/k3d-bug-buddy
-#chrpath -d %{buildroot}%{_bindir}/k3d-make-module-proxy
-#chrpath -d %{buildroot}%{_bindir}/k3d-renderframe
-#chrpath -d %{buildroot}%{_bindir}/k3d-renderjob
-#chrpath -d %{buildroot}%{_bindir}/k3d-sl2xml
-#endif
 
 popd
 
