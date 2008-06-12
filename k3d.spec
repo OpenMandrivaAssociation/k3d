@@ -78,15 +78,19 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
+%if %mdkversion < 200900
 %post
 %{update_menus}
 %{update_desktop_database}
 %update_icon_cache hicolor
+%endif
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %{clean_desktop_database}
 %clean_icon_cache hicolor
+%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root)
