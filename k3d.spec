@@ -37,6 +37,7 @@ BuildRequires:	chrpath
 Requires:	yafray
 Requires:	povray
 Requires:	aqsis
+Obsoletes:	%{mklibname k3d 0} <= %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -49,6 +50,8 @@ motion-picture-quality animation using RenderMan-compliant render engines.
 %package devel
 Summary:	K-3D development headers
 Group:		Development/C++
+Obsoletes:	%{mklibname k3d -d} <= %{version}-%{release}
+Obsoletes:	%{mklibname k3d -d -s} <= %{version}-%{release}
 
 %description devel
 Development libraries needed to develop new k3d plugins.
