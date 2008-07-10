@@ -1,13 +1,16 @@
+%define _disable_ld_no_undefined 1
+
 Name:		k3d
-Version:	0.7.4.0
+Version:	0.7.5.0
 Release:	%mkrel 1
 License:	GPLv2+
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Group:		Graphics
-Url:		http://www.k-3d.org
+URL:		http://www.k-3d.org
 Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		k3d-source-0.7.4.0-libdir.patch
+Patch1:		k3d-source-0.7.5.0-libdl.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -55,6 +58,7 @@ Development libraries needed to develop new k3d plugins.
 %if %{_lib} != lib 
 %patch0 -p1
 %endif
+%patch1 -p1
 
 %build
 %cmake \
