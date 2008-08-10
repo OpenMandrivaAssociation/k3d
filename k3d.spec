@@ -1,7 +1,7 @@
 %define _disable_ld_no_undefined 1
 
 Name:		k3d
-Version:	0.7.5.0
+Version:	0.7.8.0
 Release:	%mkrel 1
 License:	GPLv2+
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
