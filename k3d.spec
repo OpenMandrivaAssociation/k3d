@@ -8,10 +8,11 @@ URL:		http://www.k-3d.org
 Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch1:		k3d-source-0.7.5.0-libdl.patch
+Patch2:		k3d-0.7.8.0-fix-underlink.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
-BuildRequires:	libexpat-devel >= 2.0.1
+BuildRequires:	expat-devel
 BuildRequires:	libgts-devel
 BuildRequires:	imagemagick-devel
 BuildRequires:	graphviz
@@ -56,10 +57,10 @@ Development libraries needed to develop new k3d plugins.
 %prep 
 %setup -q -n %{name}-source-%{version}
 %patch1 -p1
+%patch2 -p0
 
 %build
 %cmake \
-    -DK3D_IMAGEMAGICK_INCLUDE_DIR="%{_includedir}/ImageMagick" \
     -DK3D_BUILD_GTS_MODULE:BOOL=ON
 
 %make
