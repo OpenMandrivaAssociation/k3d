@@ -35,6 +35,7 @@ BuildRequires:	chrpath
 Requires:	yafray
 Requires:	povray
 Requires:	aqsis
+Conflicts:	k3d-devel < %version
 Obsoletes:	%{mklibname k3d 0} <= %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -48,6 +49,7 @@ motion-picture-quality animation using RenderMan-compliant render engines.
 %package devel
 Summary:	K-3D development headers
 Group:		Development/C++
+Requires:	%name = %version
 Obsoletes:	%{mklibname k3d -d} <= %{version}-%{release}
 Obsoletes:	%{mklibname k3d -d -s} <= %{version}-%{release}
 
@@ -96,15 +98,16 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS README INSTALL
-%dir %{_datadir}/%{name}
 %{_bindir}/%{name}*
-%{_libdir}/%{name}
+%{_libdir}/libk3dsdk*.so
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/plugins
+%{_libdir}/%{name}/uiplugins
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 %{_datadir}/applications/%{name}.desktop
 
 %files devel
 %defattr(-,root,root)
-%{_libdir}/libk3dsdk*.so
 %{_libdir}/%{name}/include
 %{_includedir}/%{name}
