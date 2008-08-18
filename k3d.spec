@@ -1,5 +1,3 @@
-%define _disable_ld_no_undefined 1
-
 Name:		k3d
 Version:	0.7.8.0
 Release:	%mkrel 1
@@ -9,7 +7,6 @@ Group:		Graphics
 URL:		http://www.k-3d.org
 Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch0:		k3d-source-0.7.4.0-libdir.patch
 Patch1:		k3d-source-0.7.5.0-libdl.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
@@ -58,9 +55,6 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
-%if %{_lib} != lib 
-%patch0 -p1
-%endif
 %patch1 -p1
 
 %build
@@ -74,7 +68,6 @@ Development libraries needed to develop new k3d plugins.
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 pushd build
 %makeinstall_std
-
 popd
 
 mkdir -p %{buildroot}%{_datadir}/applications
@@ -104,21 +97,8 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %doc AUTHORS README INSTALL
 %dir %{_datadir}/%{name}
 %{_bindir}/%{name}*
-%{_libdir}/%{name}/plugins
-%{_libdir}/%{name}/uiplugins
-%{_datadir}/%{name}/*.k3d
-%{_datadir}/%{name}/icons/*
-%{_datadir}/%{name}/documents
-%{_datadir}/%{name}/ngui/*
-%{_datadir}/%{name}/scripts/*
-%{_datadir}/%{name}/shaders/*
-%{_datadir}/%{name}/lsystem/*
-%{_datadir}/%{name}/textures/*
-%{_datadir}/%{name}/qtui/*
-%{_datadir}/%{name}/fonts/*.ttf
-%{_datadir}/%{name}/logo/*.svg
-%{_datadir}/%{name}/tutorials/*
-%{_datadir}/%{name}/locale/*
+%{_libdir}/%{name}
+%{_datadir}/%{name}
 %{_mandir}/man1/*
 %{_datadir}/applications/%{name}.desktop
 
