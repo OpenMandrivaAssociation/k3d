@@ -9,6 +9,7 @@ Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch1:		k3d-source-0.7.5.0-libdl.patch
 Patch2:		k3d-0.7.8.0-fix-underlink.patch
+Patch3:		k3d-0.7.8.0-fix-boost.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -60,6 +61,7 @@ Development libraries needed to develop new k3d plugins.
 %setup -q -n %{name}-source-%{version}
 %patch1 -p1
 %patch2 -p0
+%patch3 -p0 -b .boost
 
 %build
 %cmake \
