@@ -7,7 +7,7 @@ Group:		Graphics
 URL:		http://www.k-3d.org
 Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch1:		k3d-source-0.7.5.0-libdl.patch
+Patch1:		k3d-0.7.8.0-libdl.patch
 Patch2:		k3d-0.7.8.0-fix-underlink.patch
 Patch3:		k3d-0.7.8.0-fix-boost.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
@@ -59,8 +59,8 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
-%patch1 -p1
-%patch2 -p0
+%patch1 -p1 -b .dl
+%patch2 -p0 -b .link
 %patch3 -p0 -b .boost
 
 %build
