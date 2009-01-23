@@ -1,11 +1,11 @@
-Name:		k3d
-Version:	0.7.9.0
-Release:	%mkrel 4
-License:	GPLv2+
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
+Name:		k3d
+Version:	0.7.10.0
+Release:	%mkrel 1
+License:	GPLv2+
 Group:		Graphics
 URL:		http://www.k-3d.org
-Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Patch1:		k3d-0.7.8.0-libdl.patch
 Patch2:		k3d-0.7.8.0-fix-underlink.patch
@@ -36,7 +36,7 @@ BuildRequires:	chrpath
 Requires:	yafray
 Requires:	povray
 Requires:	aqsis
-Conflicts:	k3d-devel < %version
+Conflicts:	k3d-devel < %{version}
 Obsoletes:	%{mklibname k3d 0} <= %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -50,7 +50,7 @@ motion-picture-quality animation using RenderMan-compliant render engines.
 %package devel
 Summary:	K-3D development headers
 Group:		Development/C++
-Requires:	%name = %version
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	%{mklibname k3d -d} <= %{version}-%{release}
 Obsoletes:	%{mklibname k3d -d -s} <= %{version}-%{release}
 
@@ -99,7 +99,7 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc AUTHORS README INSTALL
+%doc AUTHORS README
 %{_bindir}/%{name}*
 %{_libdir}/libk3dsdk*.so
 %dir %{_libdir}/%{name}
