@@ -1,15 +1,15 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
-Version:	0.7.10.0
+Version:	0.7.11.0
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://www.k-3d.org
-Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch1:		k3d-0.7.8.0-libdl.patch
-Patch2:		k3d-0.7.8.0-fix-underlink.patch
-Patch3:		k3d-0.7.8.0-fix-boost.patch
+Patch0:		k3d-0.7.11.0-fix-potfiles.patch
+Patch1:		k3d-0.7.11.0-libdl.patch
+Patch2:		k3d-0.7.11.0-glx-linkage.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -59,14 +59,15 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
+%patch0 -p1 -b .pot
 %patch1 -p1 -b .dl
-%patch2 -p0 -b .link
-%patch3 -p0 -b .boost
+%patch2 -p0 -b .gfx
+rm -f CMakeCache.txt
 
 %build
 %cmake \
     -DK3D_BUILD_GTS_MODULE:BOOL=ON
-
+export LD_LIBRARY_PATH=%{_builddir}/k3d-source-%{version}/build/lib:%{_builddir}/k3d-source-%{version}/build/%{_lib}:$LD_LIBRARY_PATH
 %make
 
 %install
