@@ -19,6 +19,7 @@ BuildRequires:	imagemagick-devel
 BuildRequires:	graphviz
 BuildRequires:	doxygen
 BuildRequires:	libext2fs-devel
+BuildRequires:	libuuid-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	libOpenEXR-devel
