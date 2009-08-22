@@ -10,6 +10,7 @@ Source1:	%{name}.desktop
 Patch0:		k3d-0.7.11.0-fix-potfiles.patch
 Patch1:		k3d-0.7.11.0-libdl.patch
 Patch2:		k3d-0.7.11.0-glx-linkage.patch
+Patch3:		k3d-0.7.11.0-gcc44.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -63,6 +64,7 @@ Development libraries needed to develop new k3d plugins.
 %patch0 -p1 -b .pot
 %patch1 -p1 -b .dl
 %patch2 -p0 -b .gfx
+%patch3 -p1 -b .gcc
 rm -f CMakeCache.txt
 
 %build
