@@ -1,11 +1,11 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
-Version:	0.7.11.0
-Release:	%mkrel 8
+Version:	0.8.0.1
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Graphics
 URL:		http://www.k-3d.org
-Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Patch0:		k3d-0.7.11.0-fix-potfiles.patch
 Patch1:		k3d-0.7.11.0-libdl.patch
@@ -61,11 +61,12 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
+%if 0
 %patch0 -p1 -b .pot
 %patch1 -p1 -b .dl
 %patch2 -p0 -b .gfx
 %patch3 -p1 -b .gcc
-rm -f CMakeCache.txt
+%endif
 
 %build
 %cmake \
