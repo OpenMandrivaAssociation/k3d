@@ -7,10 +7,7 @@ Group:		Graphics
 URL:		http://www.k-3d.org
 Source0:	http://downloads.sourceforge.net/k3d/%{name}-source-%{version}.tar.bz2
 Source1:	%{name}.desktop
-Patch0:		k3d-0.7.11.0-fix-potfiles.patch
-Patch1:		k3d-0.7.11.0-libdl.patch
-Patch2:		k3d-0.7.11.0-glx-linkage.patch
-Patch3:		k3d-0.7.11.0-gcc44.patch
+Patch1:		k3d-0.8.0.1-libdl.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -61,12 +58,7 @@ Development libraries needed to develop new k3d plugins.
 
 %prep 
 %setup -q -n %{name}-source-%{version}
-%if 0
-%patch0 -p1 -b .pot
 %patch1 -p1 -b .dl
-%patch2 -p0 -b .gfx
-%patch3 -p1 -b .gcc
-%endif
 
 %build
 %cmake \
@@ -109,7 +101,6 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_libdir}/libk3dsdk*.so
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/plugins
-%{_libdir}/%{name}/uiplugins
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 %{_datadir}/applications/%{name}.desktop
