@@ -28,6 +28,7 @@ BuildRequires:	python-devel >= 2.5
 BuildRequires:	glew-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	gnome-vfs2-devel
+BuildRequires:	libgtksourceview-2.0-devel
 BuildRequires:	cmake
 %ifarch x86_64
 BuildRequires:	chrpath
@@ -98,7 +99,7 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %defattr(-,root,root)
 %doc AUTHORS README
 %{_bindir}/%{name}*
-%{_libdir}/libk3dsdk*.so
+%{_libdir}/libk3d*.so
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/plugins
 %{_datadir}/%{name}
