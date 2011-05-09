@@ -53,6 +53,7 @@ motion-picture-quality animation using RenderMan-compliant render engines.
 Summary:	K-3D development headers
 Group:		Development/C++
 Requires:	%{name} = %{version}-%{release}
+Conflicts:	k3d < 0.8.0.2
 Obsoletes:	%{mklibname k3d -d} <= %{version}-%{release}
 Obsoletes:	%{mklibname k3d -d -s} <= %{version}-%{release}
 
@@ -104,14 +105,17 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %defattr(-,root,root)
 %doc AUTHORS README
 %{_bindir}/%{name}*
-%{_libdir}/libk3d*.so
+%{_libdir}/libk3d*.so.*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/plugins
 %{_datadir}/%{name}
+%exclude %{_datadir}/k3d/shaders/*.h
 %{_mandir}/man1/*
 %{_datadir}/applications/%{name}.desktop
 
 %files devel
 %defattr(-,root,root)
+%{_libdir}/libk3d*.so
 %{_libdir}/%{name}/include
 %{_includedir}/%{name}
+%{_datadir}/k3d/shaders/*.h
