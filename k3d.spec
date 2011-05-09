@@ -10,6 +10,7 @@ Source1:	%{name}.desktop
 Patch1:		k3d-0.8.0.1-libdl.patch
 Patch2:		k3d-0.8.0.2-gtkmm224.patch
 Patch3:		k3d-0.8.0.2-gcc-4.6.diff
+Patch4:		k3d-0.8.0.2-lib64.patch
 BuildRequires:	gtkmm2.4-devel >= 2.12.3
 BuildRequires:	boost-devel
 BuildRequires:	mesa-common-devel
@@ -65,10 +66,10 @@ Development libraries needed to develop new k3d plugins.
 %patch1 -p1 -b .dl
 %patch2 -p1 -b .gtkmm
 %patch3 -p1 -b .gcc
+%patch4 -p1 -b .lib64
 
 %build
 %cmake \
-    -DK3D_LIBDIR=%{_lib} \
     -DK3D_BUILD_GTS_MODULE:BOOL=ON
 export LD_LIBRARY_PATH=%{_builddir}/k3d-source-%{version}/build/lib:%{_builddir}/k3d-source-%{version}/build/%{_lib}:$LD_LIBRARY_PATH
 %make
