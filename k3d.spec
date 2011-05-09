@@ -62,6 +62,7 @@ Development libraries needed to develop new k3d plugins.
 %patch1 -p1 -b .dl
 
 %build
+export CXXFLAGS="%optflags -fpermissive"
 %cmake \
     -DK3D_BUILD_GTS_MODULE:BOOL=ON
 export LD_LIBRARY_PATH=%{_builddir}/k3d-source-%{version}/build/lib:%{_builddir}/k3d-source-%{version}/build/%{_lib}:$LD_LIBRARY_PATH
