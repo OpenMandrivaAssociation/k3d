@@ -42,7 +42,7 @@ Requires:	yafray
 Requires:	povray
 Requires:	aqsis
 Conflicts:	k3d-devel < %{version}
-Obsoletes:	%{mklibname k3d 0} <= %{version}-%{release}
+Obsoletes:	%{_lib}k3d0 <= %{version}-%{release}
 
 %description
 K-3D is the free-as-in-freedom 3D modeling, animation, and rendering 
@@ -56,8 +56,8 @@ Summary:	K-3D development headers
 Group:		Development/C++
 Requires:	%{name} = %{version}-%{release}
 Conflicts:	k3d < 0.8.0.2
-Obsoletes:	%{mklibname k3d -d} <= %{version}-%{release}
-Obsoletes:	%{mklibname k3d -d -s} <= %{version}-%{release}
+Obsoletes:	%{_lib}k3d-devel <= %{version}-%{release}
+Obsoletes:	%{_lib}k3d-static-devel <= %{version}-%{release}
 
 %description devel
 Development libraries needed to develop new k3d plugins.
