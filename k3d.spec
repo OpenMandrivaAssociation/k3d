@@ -1,7 +1,7 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.8.0.2
-Release:	%mkrel 1
+Release:	2
 License:	GPLv2+
 Group:		Graphics
 URL:		http://www.k-3d.org
@@ -11,28 +11,30 @@ Patch1:		k3d-0.8.0.1-libdl.patch
 Patch2:		k3d-0.8.0.2-gtkmm224.patch
 Patch3:		k3d-0.8.0.2-gcc-4.6.diff
 Patch4:		k3d-0.8.0.2-lib64.patch
-BuildRequires:	gtkmm2.4-devel >= 2.12.3
-BuildRequires:	boost-devel
-BuildRequires:	mesa-common-devel
-BuildRequires:	expat-devel
-BuildRequires:	libgts-devel
-BuildRequires:	imagemagick-devel
-BuildRequires:	graphviz
-BuildRequires:	doxygen
-BuildRequires:	libext2fs-devel
-BuildRequires:	libuuid-devel
-BuildRequires:	gtkglext-devel
-BuildRequires:	freetype2-devel
-BuildRequires:	libOpenEXR-devel
-BuildRequires:	libtiff-devel
-BuildRequires:	libpng-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	python-devel >= 2.5
-BuildRequires:	glew-devel
-BuildRequires:	librsvg-devel
-BuildRequires:	gnome-vfs2-devel
-BuildRequires:	libgtksourceview-2.0-devel
+Patch5:		k3d-source-0.8.0.2_libpng15.patch
+
 BuildRequires:	cmake
+BuildRequires:	doxygen
+BuildRequires:	graphviz
+BuildRequires:	boost-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	tiff-devel
+BuildRequires:	pkgconfig(expat)
+BuildRequires:	pkgconfig(ext2fs)
+BuildRequires:	pkgconfig(freetype2)
+BuildRequires:	pkgconfig(glew)
+BuildRequires:	pkgconfig(glu)
+BuildRequires:	pkgconfig(gnome-vfs-2.0)
+BuildRequires:	pkgconfig(gtkglext-1.0)
+BuildRequires:	pkgconfig(gtkmm-2.4)
+BuildRequires:	pkgconfig(gtksourceview-2.0)
+BuildRequires:	pkgconfig(gts)
+BuildRequires:	pkgconfig(ImageMagick)
+BuildRequires:	pkgconfig(libpng)
+BuildRequires:	pkgconfig(librsvg-2.0)
+BuildRequires:	pkgconfig(OpenEXR)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(uuid)
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
@@ -41,7 +43,6 @@ Requires:	povray
 Requires:	aqsis
 Conflicts:	k3d-devel < %{version}
 Obsoletes:	%{mklibname k3d 0} <= %{version}-%{release}
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 K-3D is the free-as-in-freedom 3D modeling, animation, and rendering 
@@ -62,11 +63,8 @@ Obsoletes:	%{mklibname k3d -d -s} <= %{version}-%{release}
 Development libraries needed to develop new k3d plugins.
 
 %prep 
-%setup -q -n %{name}-source-%{version}
-%patch1 -p1 -b .dl
-%patch2 -p1 -b .gtkmm
-%patch3 -p1 -b .gcc
-%patch4 -p1 -b .lib64
+%setup -qn %{name}-source-%{version}
+%apply_patches
 
 %build
 %cmake \
@@ -75,47 +73,36 @@ export LD_LIBRARY_PATH=%{_builddir}/k3d-source-%{version}/build/lib:%{_builddir}
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-pushd build
-%makeinstall_std
-popd
+%makeinstall_std -C build
 
 mkdir -p %{buildroot}%{_datadir}/applications
 install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %find_lang %{name}
 
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%{update_desktop_database}
-%update_icon_cache hicolor
-%endif
-
-%if %mdkversion < 200900
-%postun
-%{clean_menus}
-%{clean_desktop_database}
-%clean_icon_cache hicolor
-%endif
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc AUTHORS README
 %{_bindir}/%{name}*
 %{_libdir}/libk3d*.so.*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/plugins
-%{_datadir}/%{name}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/documents
+%{_datadir}/%{name}/fonts
+%{_datadir}/%{name}/geometry
+%{_datadir}/%{name}/icons
+%{_datadir}/%{name}/logo
+%{_datadir}/%{name}/lsystem
+%{_datadir}/%{name}/ngui
+%{_datadir}/%{name}/scripts
+%{_datadir}/%{name}/shaders
+%{_datadir}/%{name}/textures
+%{_datadir}/%{name}/*.k3d
 %exclude %{_datadir}/k3d/shaders/*.h
-%{_mandir}/man1/*
 %{_datadir}/applications/%{name}.desktop
+%{_mandir}/man1/*
 
 %files devel
-%defattr(-,root,root)
 %{_libdir}/libk3d*.so
 %{_libdir}/%{name}/include
 %{_includedir}/%{name}
