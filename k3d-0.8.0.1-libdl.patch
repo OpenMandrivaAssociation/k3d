@@ -1,0 +1,10 @@
+--- k3d-source-0.8.0.1/k3dsdk/CMakeLists.txt.dl	2010-04-18 07:49:33.000000000 +0200
++++ k3d-source-0.8.0.1/k3dsdk/CMakeLists.txt	2010-08-24 06:53:51.000000000 +0200
+@@ -64,6 +64,7 @@
+ 	k3dsdk-glew
+ 	k3dsdk-parallel
+ 	${K3D_BOOST_UNIT_TEST_FRAMEWORK_LIBS}
++	dl
+ 	)
+ 
+ IF(NOT WIN32)

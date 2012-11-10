@@ -1,0 +1,12 @@
+--- k3d-source-0.8.0.2.orig/CMakeLists.txt	2010-07-03 04:27:53.000000000 +0200
++++ k3d-source-0.8.0.2/CMakeLists.txt	2011-02-10 10:28:23.236698104 +0100
+@@ -326,7 +326,8 @@
+ # Setup output directories ...
+ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${k3d_BINARY_DIR}/bin)
+ 
+-SET(K3D_LIBDIR lib) # Allows us to handle 64-bit libs if/when it becomes necessary.
++# SET(K3D_LIBDIR lib) # Allows us to handle 64-bit libs if/when it becomes necessary.
++SET(K3D_LIBDIR lib${LIB_SUFFIX}) 
+ IF(WIN32)
+ 	SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${k3d_BINARY_DIR}/bin)
+ ELSE(WIN32)
