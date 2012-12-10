@@ -1,7 +1,7 @@
 Summary:	K-3D open-source 3D modeling, animation, and rendering system
 Name:		k3d
 Version:	0.8.0.2
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Graphics
 URL:		http://www.k-3d.org
@@ -12,6 +12,7 @@ Patch2:		k3d-0.8.0.2-gtkmm224.patch
 Patch3:		k3d-0.8.0.2-gcc-4.6.diff
 Patch4:		k3d-0.8.0.2-lib64.patch
 Patch5:		k3d-source-0.8.0.2_libpng15.patch
+Patch6:		k3d-0.8.0.2-gcc-4.7.patch
 
 BuildRequires:	cmake
 BuildRequires:	doxygen
@@ -62,7 +63,7 @@ Obsoletes:	%{_lib}k3d-static-devel <= %{version}-%{release}
 %description devel
 Development libraries needed to develop new k3d plugins.
 
-%prep 
+%prep
 %setup -qn %{name}-source-%{version}
 %apply_patches
 
@@ -107,3 +108,5 @@ install -m644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 %{_libdir}/%{name}/include
 %{_includedir}/%{name}
 %{_datadir}/k3d/shaders/*.h
+
+

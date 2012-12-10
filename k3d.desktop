@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=K-3D
+Comment=3D modeling and animation
+Exec=/usr/bin/k3d
+Icon=/usr/share/k3d/icons/k3d2.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GTK;Graphics;3DGraphics;
