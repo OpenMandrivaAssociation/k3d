@@ -65,7 +65,7 @@ Development libraries needed to develop new k3d plugins.
 
 %prep
 %setup -qn %{name}-source-%{version}
-%apply_patches
+%autopatch -p1
 
 %build
 %cmake \
