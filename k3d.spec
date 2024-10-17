@@ -4,7 +4,7 @@ Version:	0.8.0.6
 Release:	1
 License:	GPLv2+
 Group:		Graphics
-URL:		http://www.k-3d.org
+URL:		https://www.k-3d.org
 Source0:	https://github.com/K-3D/k3d/archive/refs/tags/k3d-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch1:		k3d-0.8.0.1-libdl.patch
